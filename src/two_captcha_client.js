@@ -127,7 +127,7 @@ class TwoCaptchaClient {
 
     // Keep pooling untill the answer is ready
     while (!decodedCaptcha.text) {
-      await this._sleep(Math.max(this.polling, 10)); // Sleep at least 10 seconds
+      await this._sleep(this.polling);
       if (Date.now() - startedAt > this.timeout) {
         this._throwError('Captcha timeout');
         return;
@@ -139,15 +139,15 @@ class TwoCaptchaClient {
   }
 
   /**
-     * Sends a ReCaptcha v3 and polls for its response
-     *
-     * @param  {Object} options             Parameters for the request
-     * @param  {string} options.googlekey   The google key from the ReCaptcha
-     * @param  {string} options.pageurl     The URL where the ReCaptcha is
-     * @param  {string} options.action      Action value for ReCaptcha
-     * @param  {boolean} options.enterprise Enterprise ReCaptcha switch
-     * @return {Promise<Captcha>}           Promise for a Captcha object
-     */
+   * Sends a ReCaptcha v3 and polls for its response
+   *
+   * @param  {Object} options             Parameters for the request
+   * @param  {string} options.googlekey   The google key from the ReCaptcha
+   * @param  {string} options.pageurl     The URL where the ReCaptcha is
+   * @param  {string} options.action      Action value for ReCaptcha
+   * @param  {boolean} options.enterprise Enterprise ReCaptcha switch
+   * @return {Promise<Captcha>}           Promise for a Captcha object
+   */
   async decodeRecaptchaV3(options = {}) {
     let startedAt = Date.now();
 
@@ -167,7 +167,7 @@ class TwoCaptchaClient {
 
     // Keep pooling untill the answer is ready
     while (!decodedCaptcha.text) {
-      await this._sleep(Math.max(this.polling, 10)); // Sleep at least 10 seconds
+      await this._sleep(this.polling);
       if (Date.now() - startedAt > this.timeout) {
         this._throwError('Captcha timeout');
         return;
